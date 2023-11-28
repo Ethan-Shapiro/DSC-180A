@@ -5,6 +5,7 @@ import time
 import neural_model
 import numpy as np
 from sklearn.metrics import r2_score
+import os
 
 
 def select_optimizer(name, lr, net, weight_decay):
@@ -53,8 +54,8 @@ def train_network(train_loader, val_loader, test_loader, num_classes,
     d = {}
     d['state_dict'] = net.state_dict()
     if name is not None:
-        torch.save(
-            d, 'C:\\Repository\\DSC-180A\\saved_nns\\init_' + name + '.pth')
+        torch.save(d, os.path.join(
+            os.getcwd(), 'saved_nns/init_' + name + '.pth'))
 
     net.cuda()
     best_val_acc = 0
@@ -84,7 +85,7 @@ def train_network(train_loader, val_loader, test_loader, num_classes,
             d['state_dict'] = net.state_dict()
             if name is not None:
                 torch.save(
-                    d, 'C:\\Repository\\DSC-180A\\saved_nns\\' + name + '.pth')
+                    d, os.path.join(os.getcwd(), 'saved_nns/' + name + '.pth'))
             net.cuda()
 
         if val_loss <= best_val_loss:
@@ -101,7 +102,8 @@ def train_network(train_loader, val_loader, test_loader, num_classes,
 
     d = {}
     d['state_dict'] = net.state_dict()
-    torch.save(d, 'saved_nns/' + name + '_final.pth')
+    torch.save(d, os.path.join(
+        os.getcwd(), 'saved_nns/' + name + '_final.pth'))
     return train_acc, best_val_acc, best_test_acc
 
 
