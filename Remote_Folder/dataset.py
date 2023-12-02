@@ -276,5 +276,5 @@ def get_stl_star(split_percentage=.8, num_train=float('inf'),
     return trainloader, valloader, testloader
 
 
-get_celeba(feature_idx=0, num_train=10_000, num_test=2_000)
+# get_celeba(feature_idx=0, num_train=10_000, num_test=2_000)
 # get_stl_star()

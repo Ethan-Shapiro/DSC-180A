@@ -42,7 +42,7 @@ def main():
     trainloader, valloader, testloader = dataset.get_celeba(
         feature_idx=15, split_percentage=0.8, num_train=150_000, num_test=20_000)
     accuracies = trainer.train_network(trainloader, valloader, testloader, NUM_CLASSES,
-                                       name=get_name('stl_star', configs), configs=configs)
+                                       name=get_name('celeba', configs), configs=configs)
     print(accuracies)
 
 
