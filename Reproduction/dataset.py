@@ -138,7 +138,7 @@ def get_celeba(feature_idx, split_percentage=.8,
     trainset = torchvision.datasets.CelebA(root=celeba_path,
                                            split='train',
                                            transform=transform,
-                                           download=True)
+                                           download=False)
     trainset = celeba_subset(trainset, feature_idx, num_samples=num_train)
     trainset, valset = split(trainset, p=split_percentage)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=128,
@@ -150,7 +150,7 @@ def get_celeba(feature_idx, split_percentage=.8,
     testset = torchvision.datasets.CelebA(root=celeba_path,
                                           split='test',
                                           transform=transform,
-                                          download=True)
+                                          download=False)
     testset = celeba_subset(testset, feature_idx, num_samples=num_test)
     testloader = torch.utils.data.DataLoader(testset, batch_size=128,
                                              shuffle=False, num_workers=1)

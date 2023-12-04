@@ -39,10 +39,11 @@ def main():
     # Datasets used in paper are in dataset.py
     # SVHN
     NUM_CLASSES = 2
+    DATASET_NAME = 'celeba'
     trainloader, valloader, testloader = dataset.get_celeba(
-        feature_idx=15, split_percentage=0.8, num_train=150_000, num_test=20_000)
+        feature_idx=38, split_percentage=0.8, num_train=150_000, num_test=20_000)
     accuracies = trainer.train_network(trainloader, valloader, testloader, NUM_CLASSES,
-                                       name=get_name('stl_star', configs), configs=configs)
+                                       name=get_name(DATASET_NAME, configs), configs=configs)
     print(accuracies)
 
 
