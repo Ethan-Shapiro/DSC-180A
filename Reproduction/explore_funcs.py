@@ -7,12 +7,13 @@ import matplotlib.pyplot as plt
 from verify_deep_NFA import *
 
 
-def get_NFA_correlation(path: str, layer_idx: int = 0, feature_idx: int = 0) -> list:
+def get_NFA_correlation(path: str, init_path: str, layer_idx: int = 0, feature_idx: int = 0) -> list:
     """
     Calculates Neural Feature Attribution (NFA) correlations for a given network layer and feature index.
 
     Parameters:
     path (str): The file path to the neural network model.
+    init_path (str): The file path to the initial neural network model.
     layer_idx (int): The index of the network layer.
     feature_idx (int): The index of the feature for NFA calculation.
 
@@ -20,9 +21,9 @@ def get_NFA_correlation(path: str, layer_idx: int = 0, feature_idx: int = 0) -> 
     list: A list containing centered NFA correlations.
     """
     results = verify_NFA(
-        path, 'celeba', layer_idx=layer_idx, feature_idx=feature_idx)
+        path, init_path, 'celeba', layer_idx=layer_idx, feature_idx=feature_idx)
     init, centered, uncentered = results
-    return centered
+    return init, centered, uncentered
 
 
 def calculate_NFM_GOP(path: str, dataset_name: str, feature_idx: int = None, layer_idx: int = 0) -> tuple:

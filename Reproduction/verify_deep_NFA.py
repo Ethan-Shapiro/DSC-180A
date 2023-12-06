@@ -99,12 +99,10 @@ def load_init_nn(path: str, width: int, depth: int, dim: int, num_classes: int, 
     Returns:
     tuple: A tuple containing the neural network model and processed matrix M.
     """
-    suffix = path.split('/')[-1]
-    prefix = '/Users/ethanshapiro/Repository/UCSD_Courses/dsc-180a/saved_nns/'
 
     net = neural_model.Net(dim, width=width, depth=depth,
                            num_classes=num_classes, act_name=act_name)
-    d = torch.load(prefix + 'init_' + suffix)
+    d = torch.load(path)
     net.load_state_dict(d['state_dict'])
 
     for idx, p in enumerate(net.parameters()):
@@ -288,12 +286,13 @@ def read_configs(path: str) -> tuple:
     return width, depth, act_name
 
 
-def verify_NFA(path: str, dataset_name: str, feature_idx: int = None, layer_idx: int = 0) -> tuple:
+def verify_NFA(path: str, init_path: str, dataset_name: str, feature_idx: int = None, layer_idx: int = 0) -> tuple:
     """
     Verifies the Neural Feature Attribution (NFA) for a given neural network model and dataset.
 
     Parameters:
     path (str): Path to the neural network model.
+    init_path (str): Path to the initial neural network model.
     dataset_name (str): Name of the dataset to be used.
     feature_idx (int, optional): Index of the feature for which NFA is to be verified.
     layer_idx (int): Index of the layer in the neural network.
@@ -323,7 +322,7 @@ def verify_NFA(path: str, dataset_name: str, feature_idx: int = None, layer_idx:
     # Load the network and initial network
     net, M = load_nn(path, width, depth, dim, NUM_CLASSES, layer_idx=layer_idx,
                      remove_init=remove_init, act_name=act_name)
-    net0, M0 = load_init_nn(path, width, depth, dim, NUM_CLASSES, layer_idx=layer_idx,
+    net0, M0 = load_init_nn(init_path, width, depth, dim, NUM_CLASSES, layer_idx=layer_idx,
                             act_name=act_name)
 
     # Build subnetwork
