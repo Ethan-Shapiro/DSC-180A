@@ -1,3 +1,6 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
 import torch
 from torch.autograd import Variable
 import torch.optim as optim
@@ -5,8 +8,6 @@ import time
 import neural_model
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import numpy as np
 
 
 def visualize_M(M, idx):
@@ -21,15 +22,15 @@ def visualize_M(M, idx):
     F = np.rollaxis(F, 0, 3)
     plt.imshow(F)
     plt.axis('off')
-    plt.savefig('./video_logs/' + str(idx).zfill(6) + '.png',
-                bbox_inches='tight', pad_inches = 0)
+    path = os.path.join(os.getcwd(), 'video_logs/')
+    plt.savefig(path + str(idx).zfill(6) + '.png',
+                bbox_inches='tight', pad_inches=0)
     return F
 
 
 def train_network(train_loader, val_loader, test_loader,
                   num_classes=2, name=None,
                   save_frames=False):
-
 
     for idx, batch in enumerate(train_loader):
         inputs, labels = batch
@@ -51,8 +52,9 @@ def train_network(train_loader, val_loader, test_loader,
     num_epochs = 501
     best_val_acc = 0
     best_test_acc = 0
-    best_val_loss = np.float("inf")
+    best_val_loss = float("inf")
     best_test_loss = 0
+    path = os.path.join(os.getcwd(), 'nn_models/')
 
     for i in range(num_epochs):
         if save_frames:
@@ -69,12 +71,14 @@ def train_network(train_loader, val_loader, test_loader,
             d = {}
             d['state_dict'] = net.state_dict()
             if name is not None:
-                torch.save(d, 'nn_models/' + name + '_trained_nn_' + str(i) + '.pth')
+                torch.save(d, os.path.join(path, name +
+                           '_trained_nn_' + str(i) + '.pth'))
             else:
-                torch.save(d, 'nn_models/trained_nn.pth')
+                torch.save(d, os.path.join(path, 'trained_nn.pth'))
             net.cuda()
 
-        train_loss = train_step(net, optimizer, train_loader, save_frames=save_frames)
+        train_loss = train_step(
+            net, optimizer, train_loader, save_frames=save_frames)
         val_loss = val_step(net, val_loader)
         test_loss = val_step(net, test_loader)
         train_acc = get_acc(net, train_loader)
@@ -88,9 +92,9 @@ def train_network(train_loader, val_loader, test_loader,
             d = {}
             d['state_dict'] = net.state_dict()
             if name is not None:
-                torch.save(d, 'nn_models/' + name + '_trained_nn.pth')
+                torch.save(d, os.path.join(path, name + '_trained_nn.pth'))
             else:
-                torch.save(d, 'nn_models/trained_nn.pth')
+                torch.save(d, os.path.join(path, 'trained_nn.pth'))
             net.cuda()
 
         if val_loss <= best_val_loss:

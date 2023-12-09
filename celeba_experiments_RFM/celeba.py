@@ -11,8 +11,10 @@ from tqdm import tqdm
 from sklearn.model_selection import train_test_split
 import hickle
 from torch.linalg import norm
+import os
 
 NUM_CLASSES = 2
+
 
 def get_balanced_data(dataset, num_samples=None):
 
@@ -66,17 +68,18 @@ def main():
 
     SIZE = 96
     transform = transforms.Compose(
-        [transforms.Resize([SIZE,SIZE]),
+        [transforms.Resize([SIZE, SIZE]),
          transforms.ToTensor()
-        ])
+         ])
 
-    celeba_path = '~/datasets/'
+    celeba_path = os.path.join(os.path.dirname(
+        os.getcwd()), 'Feature_Learning_Files', 'datasets')
     trainset = torchvision.datasets.CelebA(root=celeba_path,
                                            split='train',
                                            transform=transform,
                                            download=True)
 
-    trainset = get_balanced_data(trainset)
+    trainset = get_balanced_data(trainset, num_samples=75_000)
     trainset, valset = split(trainset, p=.8)
 
     print("Train Size: ", len(trainset), "Val Size: ", len(valset))
@@ -92,7 +95,7 @@ def main():
                                           transform=transform,
                                           download=True)
 
-    testset = get_balanced_data(testset)
+    testset = get_balanced_data(testset, 6_000)
     print("Test Size: ", len(testset))
 
     testloader = torch.utils.data.DataLoader(testset, batch_size=512,
@@ -109,5 +112,5 @@ def main():
     t.train_network(trainloader, valloader, testloader, name=name)
 
 
-if  __name__ == "__main__":
+if __name__ == "__main__":
     main()

@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from tqdm import tqdm
 from numpy.linalg import norm
+import os
 
 
 def one_hot_data(dataset, num_classes, num_samples=-1, shift_label=False):
@@ -34,7 +35,7 @@ def get_cifar(split_percentage=.8, num_train=float('inf'), num_test=float('inf')
 
     NUM_CLASSES = 10
     transform = transforms.Compose([transforms.ToTensor()])
-    path = '~/datasets/'
+    path = os.path.join(os.getcwd(), 'datasets/')
 
     trainset = torchvision.datasets.CIFAR10(root=path,
                                             train=True,
@@ -250,7 +251,7 @@ def get_stl_star(split_percentage=.8, num_train=float('inf'),
          transforms.ToTensor()
          ])
 
-    path = '~/datasets/'
+    path = os.path.join(os.getcwd(), 'datasets/')
     trainset = torchvision.datasets.STL10(root=path,
                                           split='train',
                                           # train=True,
