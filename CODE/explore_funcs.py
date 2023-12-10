@@ -81,7 +81,7 @@ def calculate_NFM_GOP(path: str, dataset_name: str, feature_idx: int = None, lay
     return M, G
 
 
-def plot_NFM_GOP(Mat: np.ndarray, feature_name: str = "Placeholder", dataset: str = 'default', save: bool = False):
+def plot_NFM_GOP(Mat: np.ndarray, is_gop: bool = False, feature_name: str = "Placeholder", dataset: str = 'default', save: bool = False):
     """
     Plots the Neural Feature Matrix (NFM) or Gradient Outer Product (GOP) of a layer.
 
@@ -94,7 +94,10 @@ def plot_NFM_GOP(Mat: np.ndarray, feature_name: str = "Placeholder", dataset: st
     Returns:
     None
     """
-    save_path = os.path.join(os.getcwd(), 'image_outputs/NFM_GOP')
+    if is_gop:
+        save_path = os.path.join(os.getcwd(), 'image_outputs/NFM_GOP/GOP')
+    else:
+        save_path = os.path.join(os.getcwd(), 'image_outputs/NFM_GOP/NFM')
     # Extract the diagonal
     diagonal = np.diag(Mat)
 
@@ -157,7 +160,7 @@ def plot_NFM_GOP(Mat: np.ndarray, feature_name: str = "Placeholder", dataset: st
     plt.show()
 
 
-def plot_top_eigenvector(Mat: np.ndarray, feature_name: str = "TopEigenvector", dataset: str = 'placeholder', save: bool = False):
+def plot_top_eigenvector(Mat: np.ndarray, is_gop: bool = False, feature_name: str = "TopEigenvector", dataset: str = 'placeholder', save: bool = False):
     """
     Plots the top eigenvector of the Neural Feature Matrix (NFM) or Gradient Outer Product (GOP).
 
@@ -173,8 +176,10 @@ def plot_top_eigenvector(Mat: np.ndarray, feature_name: str = "TopEigenvector", 
     # Compute eigenvectors and eigenvalues of the square matrix
     eigenvalues, eigenvectors = eigsh(Mat, k=1)
 
-    # Extract the top eigenvector
+    # Extract the top eigenvector and normalize it
     top_eigenvector = eigenvectors[:, np.argmax(eigenvalues)]
+    if not is_gop:
+        top_eigenvector /= np.linalg.norm(top_eigenvector)
 
     # Split the top eigenvector into three parts for RGB channels
     length = len(top_eigenvector) // 3
@@ -199,9 +204,16 @@ def plot_top_eigenvector(Mat: np.ndarray, feature_name: str = "TopEigenvector", 
     plt.imshow(top_image_rgb)
     plt.title(f"{feature_name}")
     plt.axis('off')
-    plt.show()
 
     # Save the plot if required
     if save:
-        plt.savefig(f"{feature_name}_{dataset}.png", bbox_inches='tight')
-        plt.close()
+        if is_gop:
+            save_path = os.path.join(
+                os.getcwd(), 'image_outputs/EigenVector_NFM_GOP/GOP')
+        else:
+            save_path = os.path.join(
+                os.getcwd(), 'image_outputs/EigenVector_NFM_GOP/NFM')
+
+        plt.savefig(os.path.join(
+            save_path, f"{feature_name}_{dataset}.png"), bbox_inches='tight')
+    plt.show()
