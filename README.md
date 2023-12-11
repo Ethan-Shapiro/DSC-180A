@@ -5,6 +5,7 @@
 ```
 Ethan Shapiro (enshapir@ucsd.edu)
 Abel Seyoum (aseyoum@ucsd.edu)
+Carlos Monterosa (cmonterosa@ucsd.edu)
 ```
 
 ## What's contained in this repo?
