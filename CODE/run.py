@@ -47,33 +47,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-
-
-# def main():
-
-#     # Pick configs to save model
-#     configs = {}
-#     configs['num_epochs'] = 200
-#     configs['learning_rate'] = .1
-#     configs['weight_decay'] = 0
-#     configs['init'] = 'default'
-#     configs['optimizer'] = 'sgd'
-#     configs['freeze'] = False
-#     configs['width'] = 512
-#     configs['depth'] = 5
-#     configs['act'] = 'relu'
-
-#     # Code to load and train net on selected dataset.
-#     # Datasets used in paper are in dataset.py
-#     # SVHN
-#     NUM_CLASSES = 2
-#     trainloader, valloader, testloader = dataset.get_stl_star(
-#         split_percentage=0.8, num_train=1_000, num_test=200)
-#     accuracies = trainer.train_network(trainloader, valloader, testloader, NUM_CLASSES,
-#                                        name=get_name('stl_star', configs), configs=configs)
-#     print(accuracies)
-
-
-# if __name__ == "__main__":
-#     main()
+    main()SSS

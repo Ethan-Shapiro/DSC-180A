@@ -1,0 +1,40 @@
+Index 0: 5 o Clock Shadow
+Index 1: Arched Eyebrows
+Index 2: Attractive
+Index 3: Bags Under Eyes
+Index 4: Bald
+Index 5: Bangs
+Index 6: Big Lips
+Index 7: Big Nose
+Index 8: Black Hair
+Index 9: Blond Hair
+Index 10: Blurry
+Index 11: Brown Hair
+Index 12: Bushy Eyebrows
+Index 13: Chubby
+Index 14: Double Chin
+Index 15: Eyeglasses
+Index 16: Goatee
+Index 17: Gray Hair
+Index 18: Heavy Makeup
+Index 19: High Cheekbones
+Index 20: Male
+Index 21: Mouth Slightly Open
+Index 22: Mustache
+Index 23: Narrow Eyes
+Index 24: No Beard
+Index 25: Oval Face
+Index 26: Pale Skin
+Index 27: Pointy Nose
+Index 28: Receding Hairline
+Index 29: Rosy Cheeks
+Index 30: Sideburns
+Index 31: Smiling
+Index 32: Straight Hair
+Index 33: Wavy Hair
+Index 34: Wearing Earrings
+Index 35: Wearing Hat
+Index 36: Wearing Lipstick
+Index 37: Wearing Necklace
+Index 38: Wearing Necktie
+Index 39: Young

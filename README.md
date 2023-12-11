@@ -18,6 +18,8 @@ Abel Seyoum (aseyoum@ucsd.edu)
 
 Depending on the system type (windows or mac/linux) you will need to install the correct `requirments.txt`. Regardless of system type, the version of python using during training is in the `.python-version` = `python 3.11.5`.
 
+Next, navigate to the `CODE` folder of the repository.
+
 The datasets used in the different training regiments are contained in `dataset.py`. The datasets can be downloaded by specifying the `download=True` flag inside the get calls to various datasets. The datasets will download to the directory `datasets` within the same location that `dataset.py` is located.
 
 To run training, open the `run.py` file to where you'll find the following configuration parameters:
@@ -32,7 +34,7 @@ To run training, open the `run.py` file to where you'll find the following confi
 - **depth**: The number of layers in the model
 - **act**: The activation function to use
 
-There are also other portions of configuration that are specific to the dataset being trained. Different dataset loaders require different parameters. For example, for the CelebA dataset we will need to specify the feature index that we want to train on. More specific details about each dataset loading function can be found in the `dataset.py`. The main training regiment can be found below.
+There are also other portions of configuration that are specific to the dataset being trained. Different dataset loaders require different parameters. For example, for the CelebA dataset we will need to specify the feature index that we want to train on. More specific details about each dataset loading function can be found in the `dataset.py`. Which feature corresponding to what index can be determined from the file named `CelebA Feature Index Mapping.txt` The main training regiment can be found below.
 
 ```
 NUM_CLASSES = 2
