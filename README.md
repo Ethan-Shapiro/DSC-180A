@@ -18,7 +18,7 @@ Abel Seyoum (aseyoum@ucsd.edu)
 
 Depending on the system type (windows or mac/linux) you will need to install the correct `requirments.txt`. Regardless of system type, the version of python using during training is in the `.python-version` = `python 3.11.5`.
 
-The datasets used in the different training regiments are contained in `dataset.py`. The datasets can be downloaded by specifying the `download=True` flag inside the get calls to various datasets.
+The datasets used in the different training regiments are contained in `dataset.py`. The datasets can be downloaded by specifying the `download=True` flag inside the get calls to various datasets. The datasets will download to the directory `datasets` within the same location that `dataset.py` is located.
 
 To run training, open the `run.py` file to where you'll find the following configuration parameters:
 
@@ -32,7 +32,7 @@ To run training, open the `run.py` file to where you'll find the following confi
 - **depth**: The number of layers in the model
 - **act**: The activation function to use
 
-There are also other portions of configuration that are specific to the dataset being trained. Different dataset loaders require different parameters. For example, for the CelebA dataset we will need to specify the feature index that we want to train on. More specific details about each dataset loading function can be found in the `dataset.py`.
+There are also other portions of configuration that are specific to the dataset being trained. Different dataset loaders require different parameters. For example, for the CelebA dataset we will need to specify the feature index that we want to train on. More specific details about each dataset loading function can be found in the `dataset.py`. The main training regiment can be found below.
 
 ```
 NUM_CLASSES = 2
@@ -54,9 +54,9 @@ After you've successfully configured everything, you can simply run the script i
 After starting the training, you should get outputs for loading the datasets and then training epochs like below.
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/andresz1/size-limit-action/master/assets/pr.png"
+<img src="TrainingExample.png"
   alt="Size Limit comment in pull request about bundle size changes"
-  width="686" height="289">
+  width="100%">
 </p>
 
 At the end of the training, you will get an output that looks similar to below.
@@ -68,6 +68,8 @@ Best Testing Accuracy:99.99
 ```
 
 You should also expect three `.pth` files to be present in the directory `saved_nns`. One should start with `init`, another ends with `final` and one that has neither. These three files are necessary to use the exploration notebook.
+
+**NOTE: If training multiple models with the same parameters, move the other `.pth` files to a different folder before training. We suggest naming that folder the name of the feature you trained on and the feature index.**
 
 ## Exploring the Outputs
 
