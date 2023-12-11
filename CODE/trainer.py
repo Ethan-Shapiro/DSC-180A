@@ -130,6 +130,10 @@ def train_network(train_loader: torch.utils.data.DataLoader, val_loader: torch.u
     d['state_dict'] = net.state_dict()
     torch.save(d, os.path.join(
         os.getcwd(), 'saved_nns/' + name + '_final.pth'))
+
+    print(
+        f"\nBest Training Accuracy: {train_loss:.2f}\nBest Validation Accuracy: {best_val_acc:.2f}\nBest Test Accuracy: {best_test_acc:.2f}")
+
     return train_acc, best_val_acc, best_test_acc
 
 
